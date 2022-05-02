@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/graphics/images/sprites.png" type="Texture" id=1]
+[ext_resource path="res://src/Nodes/Physics/HitArea2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Nodes/Character/Character.cs" type="Script" id=3]
+[ext_resource path="res://src/Nodes/Physics/ScanArea2D.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[node name="Character" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -2 )
+hframes = 15
+vframes = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="HitArea2D" parent="." instance=ExtResource( 2 )]
+
+[node name="ScanArea2D" parent="." instance=ExtResource( 4 )]

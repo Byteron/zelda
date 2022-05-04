@@ -13,8 +13,20 @@ script = ExtResource( 1 )
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 position = Vector2( 181, 63 )
 
+[node name="Enemy2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 216, 80 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 240, 120 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 288, 144 )
+
+[node name="Enemy5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 232, 168 )
+
 [node name="Character" parent="." instance=ExtResource( 3 )]
-position = Vector2( 69, 62 )
+position = Vector2( 16, 56 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 168, 104 )

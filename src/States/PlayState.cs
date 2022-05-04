@@ -10,8 +10,7 @@ namespace Zelda.States
             UpdateSystems
                 .Add(new PlayerMoveSystem())
                 .Add(new PlayerAttackSystem())
-                .Add(new AiTargetSystem())
-                .Add(new AiMoveSystem())
+                .Add(new AiSystem())
                 .Add(new DamageTriggerSystem());
         }
     }

@@ -11,11 +11,10 @@ namespace Zelda.Systems
         public TargetEntity(Entity entity) => Entity = entity;
     }
     
-    public class AiTargetSystem : ISystem
+    public class AiSystem : ISystem
     {
         public void Run(Commands commands)
         {
-            GD.Print("AiTargetSystem");
             
             if (!commands.TryGetElement<PlayerCharacter>(out var playerCharacter)) return;
 
@@ -27,15 +26,23 @@ namespace Zelda.Systems
             withoutTarget.ForEach((Entity entity, ref Node<Enemy> enemy) =>
             {
                 if (playerNode.Position.DistanceTo(enemy.Value.Position) > enemy.Value.Vision) return;
-                GD.Print("Attach TargetEntity");
                 entity.Add(new TargetEntity(playerCharacter.Entity));
             });
             
             withTarget.ForEach((Entity entity, ref Node<Enemy> enemy) =>
             {
-                if (playerNode.Position.DistanceTo(enemy.Value.Position) <= enemy.Value.Vision) return;
-                GD.Print("Remove TargetEntity");
+                var distance = playerNode.Position.DistanceTo(enemy.Value.Position);
+                if (distance <= enemy.Value.Vision && distance > 24) return;
                 entity.Remove<TargetEntity>();
+            });
+            
+            commands.ForEach((ref Node<Enemy> enemy, ref Node<ScanArea2D> scanArea, ref TargetEntity targetEntity) =>
+            {
+                var targetCharacter = targetEntity.Entity.Get<Node<Character>>().Value;
+                scanArea.Value.LookAt(targetCharacter.GlobalPosition);
+                
+                var direction = enemy.Value.GlobalPosition.DirectionTo(targetCharacter.GlobalPosition);
+                enemy.Value.MoveAndSlide(direction * 45f);
             });
         }
     }

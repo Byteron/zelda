@@ -20,6 +20,6 @@ public class Enemy : KinematicBody2D
 
     public override void _Draw()
     {
-        DrawCircle(Vector2.Zero, Vision, new Color("33FF0000"));
+        // DrawCircle(Vector2.Zero, Vision, new Color("33FF0000"));
     }
 }

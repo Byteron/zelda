@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=2 format=2]
 
 [sub_resource type="StreamTexture" id=4]
-load_path = "res://.import/overworld.png-7c005d9c6e7332a67f817d3bbe2cfd8a.stex"
+load_path = "res://.import/overworld.png-9f379298622cb4d5d2bb5ddd218b76b7.stex"
 
 [resource]
 0/name = "ground.tres::4 0"

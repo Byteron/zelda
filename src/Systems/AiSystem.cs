@@ -15,7 +15,6 @@ namespace Zelda.Systems
     {
         public void Run(Commands commands)
         {
-            
             if (!commands.TryGetElement<PlayerCharacter>(out var playerCharacter)) return;
 
             var playerNode = playerCharacter.Entity.Get<Node<Character>>().Value;

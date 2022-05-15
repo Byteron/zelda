@@ -4,7 +4,7 @@
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="StreamTexture" id=4]
-load_path = "res://.import/overworld.png-7c005d9c6e7332a67f817d3bbe2cfd8a.stex"
+load_path = "res://.import/overworld.png-9f379298622cb4d5d2bb5ddd218b76b7.stex"
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )

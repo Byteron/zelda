@@ -10,11 +10,6 @@ namespace Zelda.Systems
     {
         public void Run(Commands commands)
         {
-            if (!commands.TryGetElement<DeltaTime>(out var deltaTime))
-            {
-                return;
-            }
-
             if (!Input.IsActionJustPressed("attack")) return;
             
             commands.ForEach((ref Node<ScanArea2D> ray, ref Strength strength, ref Player _) =>
@@ -25,7 +20,7 @@ namespace Zelda.Systems
 
                 foreach (Area2D area in areas)
                 {
-                    if (!(area is HitArea2D hitArea)) continue;
+                    if (area is not HitArea2D hitArea) continue;
                     
                     var meta = hitArea.GetMeta("Entity");
 

@@ -1,7 +1,6 @@
 using Godot;
 using RelEcs;
 using RelEcs.Godot;
-using Zelda.Core;
 
 namespace Zelda.Systems
 {
@@ -9,11 +8,6 @@ namespace Zelda.Systems
     {
         public void Run(Commands commands)
         {
-            if (!commands.TryGetElement<DeltaTime>(out var deltaTime))
-            {
-                return;
-            }
-            
             commands.ForEach((ref Node<Character> node, ref Node<ScanArea2D> scanArea, ref Player player) =>
             {
                 var direction = GetMoveDirection();

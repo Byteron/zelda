@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using RelEcs;
 using RelEcs.Godot;
 using Zelda.Components;

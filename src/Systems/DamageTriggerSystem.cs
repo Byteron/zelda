@@ -34,7 +34,7 @@ namespace Zelda.Systems
 
                 if (health.Value > 0) return;
                 
-                trigger.Entity.Despawn();
+                trigger.Entity.Despawn(true);
                 GD.Print("DEATH!");
             });
         }

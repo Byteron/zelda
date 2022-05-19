@@ -1,6 +1,8 @@
+using RelEcs;
+
 namespace Zelda.Components
 {
-    public struct Health
+    public class Health
     {
         public int Value;
         public int Max;

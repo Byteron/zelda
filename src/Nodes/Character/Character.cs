@@ -4,7 +4,7 @@ using RelEcs.Godot;
 using Zelda.Components;
 using Zelda.Resources;
 
-public struct Player
+public class Player
 {
     public float Speed;
 }

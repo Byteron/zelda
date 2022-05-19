@@ -1,6 +1,8 @@
+using RelEcs;
+
 namespace Zelda.Components
 {
-    public struct Strength
+    public class Strength
     {
         public int Value;
 

@@ -12,11 +12,11 @@ namespace Zelda.Systems
         {
             if (!Input.IsActionJustPressed("attack")) return;
             
-            commands.ForEach((ref Node<ScanArea2D> ray, ref Strength strength, ref Player _) =>
+            commands.ForEach((ScanArea2D ray, Strength strength, Player _) =>
             {
                 GD.Print("Attack!");
                 
-                var areas = ray.Value.GetOverlappingAreas();
+                var areas = ray.GetOverlappingAreas();
 
                 foreach (Area2D area in areas)
                 {

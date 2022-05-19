@@ -5,7 +5,7 @@ using Zelda.Resources;
 
 namespace Zelda.Systems
 {
-    public struct TargetEntity
+    public class TargetEntity
     {
         public Entity Entity;
         public TargetEntity(Entity entity) => Entity = entity;
@@ -17,31 +17,31 @@ namespace Zelda.Systems
         {
             if (!commands.TryGetElement<PlayerCharacter>(out var playerCharacter)) return;
 
-            var playerNode = playerCharacter.Entity.Get<Node<Character>>().Value;
+            var playerNode = playerCharacter.Entity.Get<Character>();
 
-            var withTarget = commands.Query().Has<Node<Enemy>>().Has<TargetEntity>();
-            var withoutTarget = commands.Query().Has<Node<Enemy>>().Not<TargetEntity>();
+            var withTarget = commands.Query().Has<Enemy>().Has<TargetEntity>();
+            var withoutTarget = commands.Query().Has<Enemy>().Not<TargetEntity>();
             
-            withoutTarget.ForEach((Entity entity, ref Node<Enemy> enemy) =>
+            withoutTarget.ForEach((Entity entity, Enemy enemy) =>
             {
-                if (playerNode.Position.DistanceTo(enemy.Value.Position) > enemy.Value.Vision) return;
+                if (playerNode.Position.DistanceTo(enemy.Position) > enemy.Vision) return;
                 entity.Add(new TargetEntity(playerCharacter.Entity));
             });
             
-            withTarget.ForEach((Entity entity, ref Node<Enemy> enemy) =>
+            withTarget.ForEach((Entity entity, Enemy enemy) =>
             {
-                var distance = playerNode.Position.DistanceTo(enemy.Value.Position);
-                if (distance <= enemy.Value.Vision && distance > 24) return;
+                var distance = playerNode.Position.DistanceTo(enemy.Position);
+                if (distance <= enemy.Vision && distance > 24) return;
                 entity.Remove<TargetEntity>();
             });
             
-            commands.ForEach((ref Node<Enemy> enemy, ref Node<ScanArea2D> scanArea, ref TargetEntity targetEntity) =>
+            commands.ForEach((Enemy enemy, ScanArea2D scanArea, TargetEntity targetEntity) =>
             {
-                var targetCharacter = targetEntity.Entity.Get<Node<Character>>().Value;
-                scanArea.Value.LookAt(targetCharacter.GlobalPosition);
+                var targetCharacter = targetEntity.Entity.Get<Character>();
+                scanArea.LookAt(targetCharacter.GlobalPosition);
                 
-                var direction = enemy.Value.GlobalPosition.DirectionTo(targetCharacter.GlobalPosition);
-                enemy.Value.MoveAndSlide(direction * 45f);
+                var direction = enemy.GlobalPosition.DirectionTo(targetCharacter.GlobalPosition);
+                enemy.MoveAndSlide(direction * 45f);
             });
         }
     }

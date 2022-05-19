@@ -5,7 +5,7 @@ using Zelda.Components;
 
 namespace Zelda.Systems
 {
-    public struct DamageTrigger
+    public class DamageTrigger
     {
         public Entity Entity;
         public int Amount;
@@ -27,7 +27,7 @@ namespace Zelda.Systems
                 
                 if (!trigger.Entity.Has<Health>()) return;
 
-                ref var health = ref trigger.Entity.Get<Health>();
+                var health = trigger.Entity.Get<Health>();
                 health.Value -= trigger.Amount;
                 
                 GD.Print("Damage Dealt!");

@@ -23,11 +23,11 @@ namespace Zelda.Core
 
     public class GameStateController : Node
     {
-        Dictionary<Type, GameState> states = new Dictionary<Type, GameState>();
+        Dictionary<Type, GameState> states = new();
 
-        Stack<GameState> stack = new Stack<GameState>();
+        Stack<GameState> stack = new();
 
-        RelEcs.World world = new RelEcs.World();
+        RelEcs.World world = new();
 
         Commands commands;
 

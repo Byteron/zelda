@@ -8,14 +8,14 @@ namespace Zelda.Systems
     {
         public void Run(Commands commands)
         {
-            commands.ForEach((ref Node<Character> node, ref Node<ScanArea2D> scanArea, ref Player player) =>
+            commands.ForEach((Character node, ScanArea2D scanArea, Player player) =>
             {
                 var direction = GetMoveDirection();
 
                 if (direction == Vector2.Zero) return;
                 
-                scanArea.Value.LookAt(scanArea.Value.GlobalPosition + direction);
-                node.Value.MoveAndSlide(direction * player.Speed);
+                scanArea.LookAt(scanArea.GlobalPosition + direction);
+                node.MoveAndSlide(direction * player.Speed);
             });
         }
 

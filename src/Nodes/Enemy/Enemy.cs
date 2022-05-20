@@ -1,18 +1,13 @@
 using Godot;
-using System;
 using RelEcs;
 using RelEcs.Godot;
 using Zelda.Components;
+using Zelda.Core;
 
 public class Enemy : KinematicBody2D
 {
-    [Export] public int Vision = 64;
+    Entity entity;
     
-    public void _Convert(Marshallable<Commands> commands)
-    {
-        commands.Value.Spawn(this).Add(new Health(16)).Add(new Strength(3));
-    }
-
     public override void _Ready()
     {
         Update();
@@ -20,6 +15,14 @@ public class Enemy : KinematicBody2D
 
     public override void _Draw()
     {
-        // DrawCircle(Vector2.Zero, Vision, new Color("33FF0000"));
+        if (entity.IsAlive)
+        {
+            DrawCircle(Vector2.Zero, entity.Get<Vision>().Value, new Color("33FF0000"));
+        }
+    }
+
+    public void _Convert(Marshallable<Commands> commands)
+    {
+        entity = commands.Value.Spawn(this).Add(new Health(16)).Add(new Strength(3)).Add(new Vision(64));
     }
 }

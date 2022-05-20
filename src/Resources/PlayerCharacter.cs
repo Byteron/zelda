@@ -1,10 +1,9 @@
 using RelEcs;
 
-namespace Zelda.Resources
+namespace Zelda.Resources;
+
+public class PlayerCharacter
 {
-    public class PlayerCharacter
-    {
-        public Entity Entity;
-        public PlayerCharacter(Entity entity) => Entity = entity;
-    }
+    public Entity Entity;
+    public PlayerCharacter(Entity entity) => Entity = entity;
 }

@@ -2,12 +2,8 @@ using Godot;
 using RelEcs;
 using RelEcs.Godot;
 using Zelda.Components;
+using Zelda.Core;
 using Zelda.Resources;
-
-public class Player
-{
-    public float Speed;
-}
 
 public class Character : KinematicBody2D
 {
@@ -15,8 +11,9 @@ public class Character : KinematicBody2D
     {
         var entity = commands.Value.Spawn(this)
             .Add(new Health(12))
-            .Add(new Player { Speed = 72f })
-            .Add(new Strength(10));
+            .Add(new Speed(72))
+            .Add(new Strength(10))
+            .Add<Controllable>();
         
         commands.Value.AddElement(new PlayerCharacter(entity));
     }

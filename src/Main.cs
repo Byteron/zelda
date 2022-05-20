@@ -1,7 +1,8 @@
-using System;
 using Godot;
 using Zelda.Core;
 using Zelda.States;
+
+namespace Zelda;
 
 public class Main : Node2D
 {
@@ -12,4 +13,3 @@ public class Main : Node2D
         gsc.PushState(new PlayState());
     }
 }
-

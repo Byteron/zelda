@@ -4,32 +4,32 @@ using RelEcs.Godot;
 using Zelda.Components;
 using Zelda.Core;
 
-namespace Zelda.Systems
+namespace Zelda.Systems;
+
+public class PlayerAttackSystem : ISystem
 {
-    public class PlayerAttackSystem : ISystem
+    public void Run(Commands commands)
     {
-        public void Run(Commands commands)
+        if (!Input.IsActionJustPressed("attack")) return;
+
+        var query = commands.Query().Has<ScanArea2D, Strength, Controllable>();
+        query.ForEach((ScanArea2D ray, Strength strength) =>
         {
-            if (!Input.IsActionJustPressed("attack")) return;
-            
-            commands.ForEach((ScanArea2D ray, Strength strength, Player _) =>
-            {
-                GD.Print("Attack!");
+            GD.Print("Attack!");
                 
-                var areas = ray.GetOverlappingAreas();
+            var areas = ray.GetOverlappingAreas();
 
-                foreach (Area2D area in areas)
-                {
-                    if (area is not HitArea2D hitArea) continue;
+            foreach (Area2D area in areas)
+            {
+                if (area is not HitArea2D hitArea) continue;
                     
-                    var meta = hitArea.GetMeta("Entity");
+                var meta = hitArea.GetMeta("Entity");
 
-                    if (meta is Marshallable<Entity> colliderEntity)
-                    {
-                        commands.Send(new DamageTrigger(colliderEntity.Value, strength.Value));
-                    }
+                if (meta is Marshallable<Entity> colliderEntity)
+                {
+                    commands.Send(new DamageTrigger(colliderEntity.Value, strength.Value));
                 }
-            });
-        }
+            }
+        });
     }
 }

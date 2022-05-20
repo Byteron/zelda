@@ -1,6 +1,8 @@
 using Godot;
 using RelEcs;
 using Zelda.Components;
+using Zelda.Nodes.Character;
+using Zelda.Nodes.Physics;
 
 namespace Zelda.Systems;
 

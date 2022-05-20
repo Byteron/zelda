@@ -2,7 +2,8 @@ using Godot;
 using RelEcs;
 using RelEcs.Godot;
 using Zelda.Components;
-using Zelda.Core;
+
+namespace Zelda.Nodes.Environment;
 
 public class Bush : Node2D
 {

@@ -8,6 +8,7 @@ public class PlayState : GameState
     public override void Init(GameStateController gameStates)
     {
         UpdateSystems
+            .Add(new DebugSystem())
             .Add(new PlayerMoveSystem())
             .Add(new PlayerAttackSystem())
             .Add(new AiSystem())

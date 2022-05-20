@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/graphics/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/graphics/tilesets/deco.tres" type="TileSet" id=2]
+[ext_resource path="res://src/Nodes/Environment/Bush.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/graphics/tilesets/ground.tres" type="TileSet" id=4]
 
 [node name="Room" type="Node2D"]
@@ -27,3 +28,57 @@ format = 1
 tile_data = PoolIntArray( 65553, 1, 0, 65554, 2, 0, 131091, 4, 0, 196609, 6, 0, 196610, 2, 0, 196617, 2, 0, 196625, 2, 0, 262152, 2, 0, 262155, 0, 0, 262157, 1, 0, 327688, 4, 0, 327693, 2, 0, 327697, 6, 0, 393231, 2, 0, 393234, 4, 0, 458770, 1, 0, 524297, 1, 0, 524305, 2, 0, 589826, 2, 0, 589828, 0, 0, 589830, 2, 0, 589843, 2, 0, 655368, 2, 0, 655374, 2, 0, 655376, 0, 0, 720899, 1, 0, 720902, 4, 0, 720910, 1, 0 )
 
 [node name="Environment" type="Node2D" parent="."]
+
+[node name="Bush" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 56, 24 )
+
+[node name="Bush2" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 72, 24 )
+
+[node name="Bush3" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 88, 24 )
+
+[node name="Bush4" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 104, 24 )
+
+[node name="Bush5" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 120, 24 )
+
+[node name="Bush7" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 104, 40 )
+
+[node name="Bush8" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 88, 40 )
+
+[node name="Bush9" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 72, 40 )
+
+[node name="Bush10" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 56, 40 )
+
+[node name="Bush11" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 168, 24 )
+
+[node name="Bush12" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 184, 40 )
+
+[node name="Bush13" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 232, 56 )
+
+[node name="Bush14" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 216, 56 )
+
+[node name="Bush15" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 152, 136 )
+
+[node name="Bush16" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 136, 136 )
+
+[node name="Bush17" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 56, 136 )
+
+[node name="Bush18" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 40, 184 )
+
+[node name="Bush19" parent="Environment" instance=ExtResource( 3 )]
+position = Vector2( 296, 88 )

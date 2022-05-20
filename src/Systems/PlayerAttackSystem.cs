@@ -3,6 +3,7 @@ using RelEcs;
 using RelEcs.Godot;
 using Zelda.Components;
 using Zelda.Core;
+using Zelda.Nodes.Physics;
 
 namespace Zelda.Systems;
 

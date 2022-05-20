@@ -1,5 +1,8 @@
 using RelEcs;
 using Zelda.Components;
+using Zelda.Nodes.Character;
+using Zelda.Nodes.Enemy;
+using Zelda.Nodes.Physics;
 using Zelda.Resources;
 
 namespace Zelda.Systems;

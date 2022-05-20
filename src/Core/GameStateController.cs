@@ -23,28 +23,27 @@ namespace Zelda.Core
 
     public class GameStateController : Node
     {
+        public RelEcs.World World = new();
+        
         Dictionary<Type, GameState> states = new();
-
         Stack<GameState> stack = new();
-
-        RelEcs.World world = new();
-
+        
         Commands commands;
 
         public GameStateController()
         {
-            world.AddElement(this);
+            World.AddElement(this);
 
-            world.AddElement(new CurrentGameState());
-            world.AddElement(new DeltaTime());
+            World.AddElement(new CurrentGameState());
+            World.AddElement(new DeltaTime());
         }
 
         public override void _Ready()
         {
             var tree = GetTree();
-            world.AddElement(tree);
+            World.AddElement(tree);
 
-            var m = new Marshallable<Commands>(new Commands(world, null));
+            var m = new Marshallable<Commands>(new Commands(World, null));
             tree.Root.PropagateCall("_Convert", new Godot.Collections.Array() { m });
         }
 
@@ -57,7 +56,7 @@ namespace Zelda.Core
 
             var currentState = stack.Peek();
             // TODO: insert godot event as trigger
-            currentState.InputSystems.Run(world);
+            currentState.InputSystems.Run(World);
         }
 
         public override void _Process(float delta)
@@ -68,17 +67,17 @@ namespace Zelda.Core
             }
 
             var currentState = stack.Peek();
-            world.GetElement<DeltaTime>().Value = delta;
-            currentState.UpdateSystems.Run(world);
+            World.GetElement<DeltaTime>().Value = delta;
+            currentState.UpdateSystems.Run(World);
 
-            world.Tick();
+            World.Tick();
         }
 
         public override void _ExitTree()
         {
             foreach (var state in stack)
             {
-                state.ExitSystems.Run(world);
+                state.ExitSystems.Run(World);
             }
         }
 
@@ -105,15 +104,15 @@ namespace Zelda.Core
             }
 
             var currentState = stack.Pop();
-            currentState.ExitSystems.Run(world);
+            currentState.ExitSystems.Run(World);
             RemoveChild(currentState);
             currentState.QueueFree();
 
             if (stack.Count > 0)
             {
                 currentState = stack.Peek();
-                world.GetElement<CurrentGameState>().State = currentState;
-                currentState.ContinueSystems.Run(world);
+                World.GetElement<CurrentGameState>().State = currentState;
+                currentState.ContinueSystems.Run(World);
             }
         }
 
@@ -129,15 +128,15 @@ namespace Zelda.Core
                     return;
                 }
 
-                currentState.PauseSystems.Run(world);
+                currentState.PauseSystems.Run(World);
             }
 
             newState.Name = newState.GetType().ToString();
             stack.Push(newState);
             AddChild(newState);
-            world.GetElement<CurrentGameState>().State = newState;
+            World.GetElement<CurrentGameState>().State = newState;
             newState.Init(this);
-            newState.InitSystems.Run(world);
+            newState.InitSystems.Run(World);
         }
 
         void ChangeStateDeferred(GameState newState)
@@ -145,7 +144,7 @@ namespace Zelda.Core
             if (stack.Count > 0)
             {
                 var currentState = stack.Pop();
-                currentState.ExitSystems.Run(world);
+                currentState.ExitSystems.Run(World);
                 RemoveChild(currentState);
                 currentState.QueueFree();
             }
@@ -153,9 +152,9 @@ namespace Zelda.Core
             newState.Name = newState.GetType().ToString();
             stack.Push(newState);
             AddChild(newState);
-            world.GetElement<CurrentGameState>().State = newState;
+            World.GetElement<CurrentGameState>().State = newState;
             newState.Init(this);
-            newState.InitSystems.Run(world);
+            newState.InitSystems.Run(World);
         }
     }
 }

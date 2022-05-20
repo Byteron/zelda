@@ -2,8 +2,9 @@ using Godot;
 using RelEcs;
 using RelEcs.Godot;
 using Zelda.Components;
-using Zelda.Core;
 using Zelda.Resources;
+
+namespace Zelda.Nodes.Character;
 
 public class Character : KinematicBody2D
 {

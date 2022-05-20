@@ -1,5 +1,3 @@
-using RelEcs;
-
 namespace Zelda.Components
 {
     public class Strength

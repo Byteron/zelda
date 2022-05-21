@@ -5,12 +5,20 @@
 [node name="Debug" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-margin_right = 14.0
-margin_bottom = 28.0
+[node name="Control" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 rect_scale = Vector2( 0.25, 0.25 )
 
-[node name="Label" type="Label" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -14.0
+margin_bottom = 28.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="Control/PanelContainer"]
 unique_name_in_owner = true
 margin_left = 7.0
 margin_top = 7.0

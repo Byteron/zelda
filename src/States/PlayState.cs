@@ -12,6 +12,7 @@ public class PlayState : GameState
             .Add(new PlayerMoveSystem())
             .Add(new PlayerAttackSystem())
             .Add(new AiSystem())
-            .Add(new DamageTriggerSystem());
+            .Add(new DamageTriggerSystem())
+            .Add(new UpdateCameraPositionSystem());
     }
 }

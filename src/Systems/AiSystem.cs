@@ -2,7 +2,6 @@ using RelEcs;
 using Zelda.Components;
 using Zelda.Nodes.Character;
 using Zelda.Nodes.Enemy;
-using Zelda.Nodes.Physics;
 using Zelda.Resources;
 
 namespace Zelda.Systems;
@@ -33,14 +32,13 @@ public class AiSystem : ISystem
         withTarget.ForEach((Entity entity, Enemy enemy, Vision vision) =>
         {
             var distance = player.Position.DistanceTo(enemy.Position);
-            if (distance <= vision.Value && distance > 24) return;
+            if (distance <= vision.Value * 1.5f && distance > 24) return;
             entity.Remove<TargetEntity>();
         });
             
-        commands.ForEach((Enemy enemy, ScanArea2D scanArea, TargetEntity targetEntity) =>
+        commands.ForEach((Enemy enemy, TargetEntity targetEntity) =>
         {
             var targetCharacter = targetEntity.Entity.Get<Character>();
-            scanArea.LookAt(targetCharacter.GlobalPosition);
                 
             var direction = enemy.GlobalPosition.DirectionTo(targetCharacter.GlobalPosition);
             enemy.MoveAndSlide(direction * 45f);

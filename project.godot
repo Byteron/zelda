@@ -95,8 +95,10 @@ attack={
 [layer_names]
 
 2d_physics/layer_1="Collision"
-2d_physics/layer_2="HitArea"
-2d_physics/layer_3="ScanArea"
+2d_physics/layer_2="Wall"
+2d_physics/layer_3="Water"
+2d_physics/layer_4="ScanArea"
+2d_physics/layer_5="HitArea"
 
 [rendering]
 

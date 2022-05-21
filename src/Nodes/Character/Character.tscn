@@ -9,17 +9,21 @@
 radius = 5.0
 
 [node name="Character" type="KinematicBody2D"]
+collision_mask = 7
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-offset = Vector2( 0, -2 )
+offset = Vector2( 0, -8 )
 hframes = 15
 vframes = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -5 )
 shape = SubResource( 1 )
 
 [node name="HitArea2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -5 )
 
 [node name="ScanArea2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -5 )

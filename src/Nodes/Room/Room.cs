@@ -1,6 +1,4 @@
 using Godot;
-using RelEcs;
-using RelEcs.Godot;
 
 public class Tile
 {
@@ -8,10 +6,10 @@ public class Tile
     public Tile(int value) => Value = value;
 }
 
-public class Coordinates
+public class Coordinates : Object
 {
     public Vector2 Value;
-    public Coordinates(int x, int y) => Value = new Vector2(x, y);
+    public Coordinates(Vector2 value) => Value = value;
 }
 
 public class Blocked { }

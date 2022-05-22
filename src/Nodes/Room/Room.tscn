@@ -9,6 +9,8 @@
 [node name="Room" type="YSort"]
 script = ExtResource( 4 )
 
+[node name="Exits" type="YSort" parent="."]
+
 [node name="Map" type="YSort" parent="."]
 
 [node name="Ground" type="TileMap" parent="Map"]

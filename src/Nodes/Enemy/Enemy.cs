@@ -9,18 +9,18 @@ public class Enemy : KinematicBody2D
 {
     Entity entity;
     
-    public override void _Ready()
-    {
-        Update();
-    }
-
-    public override void _Draw()
-    {
-        if (!entity.IsAlive) return;
-        
-        DrawCircle(Vector2.Zero, entity.Get<Vision>().Value, new Color("33FF0000"));
-        DrawCircle(Vector2.Zero, entity.Get<Vision>().Value * 1.5f, new Color("33FF0000"));
-    }
+    // public override void _Ready()
+    // {
+    //     Update();
+    // }
+    //
+    // public override void _Draw()
+    // {
+    //     if (!entity.IsAlive) return;
+    //     
+    //     DrawCircle(Vector2.Zero, entity.Get<Vision>().Value, new Color("33FF0000"));
+    //     DrawCircle(Vector2.Zero, entity.Get<Vision>().Value * 1.5f, new Color("33FF0000"));
+    // }
 
     public void _Convert(Marshallable<Commands> commands)
     {

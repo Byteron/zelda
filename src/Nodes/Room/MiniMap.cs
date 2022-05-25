@@ -34,7 +34,5 @@ public class MiniMap : CanvasLayer
         GD.Print("ActiveRoom Drawn: ", room);
         
         rect.Texture = texture;
-        
-        
     }
 }

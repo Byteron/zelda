@@ -22,7 +22,7 @@ public class SpawnSystem : Object, ISystem
         this.commands = commands;
         state = commands.GetElement<CurrentGameState>().State;
 
-        commands.ForEach((Coordinates coords, PackedScene scene) => Spawn(coords, scene));
+        foreach (var (coordinates, scene) in commands.Query<Coordinates, PackedScene>()) Spawn(coordinates, scene);
     }
 
     void Spawn(Coordinates coords, PackedScene scene)
@@ -31,7 +31,7 @@ public class SpawnSystem : Object, ISystem
         state.AddChild(instance);
         
         instance.GlobalPosition = coords.Value;
-        // instance.Connect("tree_exited", this, nameof(OnInstanceFreed), new Array() { coords, scene });
+        instance.Connect("tree_exited", this, nameof(OnInstanceFreed), new Array() { coords, scene });
         
         if (instance.HasMethod("_Convert")) instance.Call("_Convert", new Marshallable<Commands>(commands));
     }

@@ -1,3 +1,4 @@
+using Godot;
 using RelEcs;
 using Zelda.Components;
 using Zelda.Nodes.Character;
@@ -6,12 +7,12 @@ using Zelda.Resources;
 
 namespace Zelda.Systems;
 
-public class TargetEntity
+public class Target
 {
     public Entity Entity;
-    public TargetEntity(Entity entity) => Entity = entity;
+    public Target(Entity entity) => Entity = entity;
 }
-    
+
 public class AiSystem : ISystem
 {
     public void Run(Commands commands)
@@ -20,28 +21,28 @@ public class AiSystem : ISystem
 
         var player = playerCharacter.Entity.Get<Character>();
 
-        var withTarget = commands.Query().Has<Enemy, Vision, TargetEntity>();
-        var withoutTarget = commands.Query().Has<Enemy, Vision>().Not<TargetEntity>();
-            
-        withoutTarget.ForEach((Entity entity, Enemy enemy, Vision vision) =>
-        {
-            if (player.Position.DistanceTo(enemy.Position) > vision.Value) return;
-            entity.Add(new TargetEntity(playerCharacter.Entity));
-        });
-            
-        withTarget.ForEach((Entity entity, Enemy enemy, Vision vision) =>
+        foreach (var (entity, enemy, vision) in commands.Query<Entity, Enemy, Vision>().Has<Target>())
         {
             var distance = player.Position.DistanceTo(enemy.Position);
-            if (distance <= vision.Value * 1.5f && distance > 24) return;
-            entity.Remove<TargetEntity>();
-        });
-            
-        commands.ForEach((Enemy enemy, TargetEntity targetEntity) =>
+            if (distance <= vision.Value * 1.5f && distance > 24) continue;
+            entity.Remove<Target>();
+            GD.Print("Target Removed");
+        }
+        
+        foreach (var (entity, enemy, vision) in commands.Query<Entity, Enemy, Vision>().Not<Target>())
         {
-            var targetCharacter = targetEntity.Entity.Get<Character>();
+            if (player.Position.DistanceTo(enemy.Position) > vision.Value) continue;
+            entity.Add(new Target(playerCharacter.Entity));
+            GD.Print("Target Added");
+        }
+
+        foreach (var (enemy, target) in commands.Query<Enemy, Target>())
+        {
+            var targetCharacter = target.Entity.Get<Character>();
                 
             var direction = enemy.GlobalPosition.DirectionTo(targetCharacter.GlobalPosition);
             enemy.MoveAndSlide(direction * 45f);
-        });
+            GD.Print("Moved To Target");
+        }
     }
 }

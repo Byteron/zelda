@@ -13,8 +13,8 @@ public class PlayerAttackSystem : ISystem
     {
         if (!Input.IsActionJustPressed("attack")) return;
 
-        var query = commands.Query().Has<ScanArea2D, Strength, Controllable>();
-        query.ForEach((ScanArea2D ray, Strength strength) =>
+        var query = commands.Query<ScanArea2D, Strength>().Has<Controllable>();
+        foreach (var (ray, strength) in query)
         {
             GD.Print("Attack!");
                 
@@ -31,6 +31,6 @@ public class PlayerAttackSystem : ISystem
                     commands.Send(new DamageTrigger(colliderEntity.Value, strength.Value));
                 }
             }
-        });
+        }
     }
 }

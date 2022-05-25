@@ -10,16 +10,16 @@ public class PlayerMoveSystem : ISystem
 {
     public void Run(Commands commands)
     {
-        var query = commands.Query().Has<Character, ScanArea2D, Speed, Controllable>();
-        query.ForEach((Character node, ScanArea2D scanArea, Speed speed) =>
+        var query = commands.Query<Character, ScanArea2D, Speed>().Has<Controllable>();
+        foreach (var (character, scanArea, speed) in query)
         {
             var direction = GetMoveDirection();
 
             if (direction == Vector2.Zero) return;
                 
             scanArea.LookAt(scanArea.GlobalPosition + direction);
-            node.MoveAndSlide(direction * speed.Value);
-        });
+            character.MoveAndSlide(direction * speed.Value);
+        }
     }
 
     static Vector2 GetMoveDirection()
